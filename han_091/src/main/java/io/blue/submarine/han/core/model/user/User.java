@@ -6,6 +6,7 @@ package io.blue.submarine.han.core.model.user;
  * @author shucunbin
  */
 public class User {
+    private Long id;
     private Integer userId;
     private String name;
 }

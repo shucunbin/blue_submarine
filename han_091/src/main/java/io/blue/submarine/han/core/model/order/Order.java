@@ -14,6 +14,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Order {
+    private Long id;
     private Integer orderId;
     private Integer userId;
     private String status;

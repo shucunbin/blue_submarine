@@ -45,7 +45,14 @@ spring:
           slave-data-source-names: ds-user-slave0
       tables:
         t_order:
-          actual-data-nodes: order_ms.t_order
+          actual-data-nodes: order_ms.t_order_$->{0..2}
+          table-strategy:
+            inline:
+              sharding-column: order_id
+              algorithm-expression: t_order_$->{order_id % 2}
+          key-generator:
+            column: id
+            type: SNOWFLAKE
         t_user:
           actual-data-nodes: user_ms.t_user
     props:

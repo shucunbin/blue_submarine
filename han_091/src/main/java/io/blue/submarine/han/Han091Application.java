@@ -1,5 +1,6 @@
 package io.blue.submarine.han;
 
+import io.blue.submarine.han.core.model.order.Order;
 import io.blue.submarine.han.dao.mapper.order.OrderMapper;
 import io.blue.submarine.han.dao.mapper.user.UserMapper;
 import org.springframework.boot.CommandLineRunner;
@@ -28,11 +29,16 @@ public class Han091Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        orderMapper.findByOrderId(1);
-        orderMapper.findByOrderId(2);
-        orderMapper.findByOrderId(3);
-
-        userMapper.findByUserId(1);
-        userMapper.findByUserId(2);
+        Order order = new Order();
+        order.setOrderId(2);
+        order.setUserId(1);
+        order.setStatus("1");
+        orderMapper.insert(order);
+//        orderMapper.findByOrderId(1);
+//        orderMapper.findByOrderId(2);
+//        orderMapper.findByOrderId(3);
+//
+//        userMapper.findByUserId(1);
+//        userMapper.findByUserId(2);
     }
 }

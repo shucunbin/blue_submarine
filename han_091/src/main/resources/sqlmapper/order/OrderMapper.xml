@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.blue.submarine.han.dao.mapper.order.OrderMapper" >
     <resultMap id="BaseResultMap" type="io.blue.submarine.han.core.model.order.Order">
-        <id column="order_id" property="orderId" jdbcType="INTEGER" />
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="order_id" property="orderId" jdbcType="INTEGER" />
         <result column="userId" property="userId" jdbcType="INTEGER" />
         <result column="status" property="status" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="findByOrderId" resultMap="BaseResultMap">
-        SELECT order_id, user_id, status
+        SELECT id, order_id, user_id, status
         FROM t_order
         WHERE order_id = #{order_id}
     </select>
 
-    <insert id="insert">
-        insert into t_order(order_id, user_id, status)
-        values(#{order_id},#{user_id},#{status})
+    <insert id="insert" parameterType = "io.blue.submarine.han.core.model.order.Order" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order(order_id, user_id, status) values(#{orderId},#{userId},#{status})
     </insert>
 </mapper>

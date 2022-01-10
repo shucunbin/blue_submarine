@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface OrderMapper {
 
-    int insert(@Param("order_id") Integer orderId, @Param("user_id") Integer userId, @Param("status") String status);
+    int insert(Order order);
 
     Order findByOrderId(@Param("order_id") Integer orderId);
 }
