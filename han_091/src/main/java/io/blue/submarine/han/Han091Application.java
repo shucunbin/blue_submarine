@@ -1,8 +1,10 @@
 package io.blue.submarine.han;
 
+import com.google.common.collect.Ordering;
 import io.blue.submarine.han.core.model.order.Order;
 import io.blue.submarine.han.dao.mapper.order.OrderMapper;
 import io.blue.submarine.han.dao.mapper.user.UserMapper;
+import io.blue.submarine.han.service.OrderService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +19,7 @@ import javax.annotation.Resource;
 @SpringBootApplication
 public class Han091Application implements CommandLineRunner {
     @Resource
-    private OrderMapper orderMapper;
+    private OrderService orderService;
 
     @Resource
     private UserMapper userMapper;
@@ -33,7 +35,14 @@ public class Han091Application implements CommandLineRunner {
         order.setOrderId(2);
         order.setUserId(1);
         order.setStatus("1");
-        orderMapper.insert(order);
+        orderService.save(order);
+
+        Order order1 = orderService.findByOrderId(1);
+        System.out.println(order1);
+
+        Order orderFromMaster = orderService.findByOrderIdFromMaster(1);
+        System.out.println("order query from master ===> " + orderFromMaster);
+
 //        orderMapper.findByOrderId(1);
 //        orderMapper.findByOrderId(2);
 //        orderMapper.findByOrderId(3);

@@ -49,12 +49,14 @@ spring:
           table-strategy:
             inline:
               sharding-column: order_id
-              algorithm-expression: t_order_$->{order_id % 2}
+              algorithm-expression: t_order_$->{order_id % 3}
           key-generator:
             column: id
             type: SNOWFLAKE
         t_user:
           actual-data-nodes: user_ms.t_user
+      defaultTableStrategy:
+        none:
     props:
       sql:
         show: true
