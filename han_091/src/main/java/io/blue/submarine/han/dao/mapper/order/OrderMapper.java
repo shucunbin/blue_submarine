@@ -14,5 +14,7 @@ public interface OrderMapper {
 
     int insert(Order order);
 
-    Order findByOrderId(@Param("order_id") Integer orderId);
+    Order selectByOrderId(@Param("orderId") Long orderId);
+
+    Order selectByUserId(@Param("userId") Long userId);
 }

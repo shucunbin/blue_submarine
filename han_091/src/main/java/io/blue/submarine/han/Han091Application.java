@@ -1,8 +1,5 @@
 package io.blue.submarine.han;
 
-import com.google.common.collect.Ordering;
-import io.blue.submarine.han.core.model.order.Order;
-import io.blue.submarine.han.dao.mapper.order.OrderMapper;
 import io.blue.submarine.han.dao.mapper.user.UserMapper;
 import io.blue.submarine.han.service.OrderService;
 import org.springframework.boot.CommandLineRunner;
@@ -31,17 +28,15 @@ public class Han091Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Order order = new Order();
-        order.setOrderId(2);
-        order.setUserId(1);
-        order.setStatus("1");
-        orderService.save(order);
-
-        Order order1 = orderService.findByOrderId(1);
-        System.out.println(order1);
-
-        Order orderFromMaster = orderService.findByOrderIdFromMaster(1);
-        System.out.println("order query from master ===> " + orderFromMaster);
+//        orderService.complexProcess();
+        orderService.findByUserId(1L);
+        orderService.findByUserId(2L);
+//
+//        Order order1 = orderService.findByOrderId(1);
+//        System.out.println(order1);
+//
+//        Order orderFromMaster = orderService.findByOrderIdFromMaster(1);
+//        System.out.println("order query from master ===> " + orderFromMaster);
 
 //        orderMapper.findByOrderId(1);
 //        orderMapper.findByOrderId(2);

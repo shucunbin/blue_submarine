@@ -5,15 +5,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 订单信息.
+ * 订单明细.
  *
  * @author shucunbin
- * @date 2022-01-07 10:30
  */
 @Getter
 @Setter
 @ToString
-public class Order {
+public class OrderItem {
+    private Long orderItemId;
     private Long orderId;
     private Long userId;
     private String status;

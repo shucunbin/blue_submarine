@@ -8,9 +8,13 @@ import io.blue.submarine.han.core.model.order.Order;
  * @author shucunbin
  */
 public interface OrderService {
-    Order findByOrderId(Integer orderId);
+    Order findByOrderId(Long orderId);
 
-    Order findByOrderIdFromMaster(Integer orderId);
+    Order findByOrderIdFromMaster(Long orderId);
 
     void save(Order order);
+
+    void complexProcess();
+
+    Order findByUserId(Long userId);
 }
