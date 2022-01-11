@@ -2,61 +2,52 @@
 spring:
   shardingsphere:
     datasource:
-      names: ds-order-master, ds-order-slave0, ds-order-slave1, ds-user-master, ds-user-slave0
-      ds-order-master:
+      names: ds-order-0, ds-order-1
+      ds-order-0:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_order_master?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://localhost:3306/db_order_0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
         username: shucunbin
         password: '!123456$'
-      ds-order-slave0:
+      ds-order-1:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_order_slave0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
-        username: shucunbin
-        password: '!123456$'
-      ds-order-slave1:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_order_slave1?useSSL=false&useUnicode=true&characterEncoding=UTF-8
-        username: shucunbin
-        password: '!123456$'
-      ds-user-master:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_user_master?useSSL=false&useUnicode=true&characterEncoding=UTF-8
-        username: shucunbin
-        password: '!123456$'
-      ds-user-slave0:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_user_slave0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://localhost:3306/db_order_1?useSSL=false&useUnicode=true&characterEncoding=UTF-8
         username: shucunbin
         password: '!123456$'
     sharding:
-      master-slave-rules:
-        order_ms:
-          load-balance-algorithm-type: round_robin
-          master-data-source-name: ds-order-master
-          slave-data-source-names: ds-order-slave0,ds-order-slave1
-        user_ms:
-          load-balance-algorithm-type: round_robin
-          master-data-source-name: ds-user-master
-          slave-data-source-names: ds-user-slave0
+      default-database-strategy:
+        inline:
+          sharding-column: user_id
+          algorithm-expression: ds-order-$->{user_id % 2}
       tables:
         t_order:
-          actual-data-nodes: order_ms.t_order_$->{0..2}
+          actual-data-nodes: ds-order-$->{0..1}.t_order_$->{0..2}
           table-strategy:
             inline:
               sharding-column: order_id
               algorithm-expression: t_order_$->{order_id % 3}
           key-generator:
-            column: id
+            column: order_id
             type: SNOWFLAKE
-        t_user:
-          actual-data-nodes: user_ms.t_user
+            props:
+              max.vibration.offset: 2
+              worker.id: 100
+        t_order_item:
+          actual-data-nodes: ds-order-$->{0..1}.t_order_item_$->{0..2}
+          table-strategy:
+            inline:
+              sharding-column: order_id
+              algorithm-expression: t_order_item_$->{order_id % 3}
+          key-generator:
+            column: order_item_id
+            type: SNOWFLAKE
+            props:
+              max.vibration.offset: 2
+              worker.id: 100
       defaultTableStrategy:
         none:
+      binding-tables: t_order, t_order_item
     props:
       sql:
         show: true

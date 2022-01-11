@@ -56,7 +56,6 @@ public class OrderServiceImpl implements OrderService {
         List<Long> orderIdList = new ArrayList<>();
         for(long i = 1; i <= 10; i ++) {
             Order order = new Order();
-            order.setOrderId(i);
             order.setUserId(i);
             order.setStatus("New");
             orderMapper.insert(order);

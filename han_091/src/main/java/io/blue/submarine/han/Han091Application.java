@@ -28,9 +28,9 @@ public class Han091Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        orderService.complexProcess();
-        orderService.findByUserId(1L);
-        orderService.findByUserId(2L);
+        orderService.complexProcess();
+//        orderService.findByUserId(1L);
+//        orderService.findByUserId(2L);
 //
 //        Order order1 = orderService.findByOrderId(1);
 //        System.out.println(order1);
@@ -38,9 +38,7 @@ public class Han091Application implements CommandLineRunner {
 //        Order orderFromMaster = orderService.findByOrderIdFromMaster(1);
 //        System.out.println("order query from master ===> " + orderFromMaster);
 
-//        orderMapper.findByOrderId(1);
-//        orderMapper.findByOrderId(2);
-//        orderMapper.findByOrderId(3);
+
 //
 //        userMapper.findByUserId(1);
 //        userMapper.findByUserId(2);

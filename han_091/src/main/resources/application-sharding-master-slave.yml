@@ -2,61 +2,82 @@
 spring:
   shardingsphere:
     datasource:
-      names: ds-order-master, ds-order-slave0, ds-order-slave1, ds-user-master, ds-user-slave0
-      ds-order-master:
+      names: ds-order-master-0,ds-order-master-1,ds-order-master-0-slave-0,ds-order-master-0-slave-1,ds-order-master-1-slave-0,ds-order-master-1-slave-1
+      ds-order-master-0:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_order_master?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://localhost:3306/db_order_master_0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
         username: shucunbin
         password: '!123456$'
-      ds-order-slave0:
+      ds-order-master-0-slave-0:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_order_slave0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://localhost:3306/db_order_master_0_slave_0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
         username: shucunbin
         password: '!123456$'
-      ds-order-slave1:
+      ds-order-master-0-slave-1:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_order_slave1?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://localhost:3306/db_order_master_0_slave_1?useSSL=false&useUnicode=true&characterEncoding=UTF-8
         username: shucunbin
         password: '!123456$'
-      ds-user-master:
+      ds-order-master-1:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_user_master?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://localhost:3306/db_order_master_1?useSSL=false&useUnicode=true&characterEncoding=UTF-8
         username: shucunbin
         password: '!123456$'
-      ds-user-slave0:
+      ds-order-master-1-slave-0:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db_user_slave0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://localhost:3306/db_order_master_1_slave_0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: shucunbin
+        password: '!123456$'
+      ds-order-master-1-slave-1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/db_order_master_1_slave_1?useSSL=false&useUnicode=true&characterEncoding=UTF-8
         username: shucunbin
         password: '!123456$'
     sharding:
       master-slave-rules:
-        order_ms:
+        ds-order-ms-0:
           load-balance-algorithm-type: round_robin
-          master-data-source-name: ds-order-master
-          slave-data-source-names: ds-order-slave0,ds-order-slave1
-        user_ms:
+          master-data-source-name: ds-order-master-0
+          slave-data-source-names: ds-order-master-0-slave-0,ds-order-master-0-slave-1
+        ds-order-ms-1:
           load-balance-algorithm-type: round_robin
-          master-data-source-name: ds-user-master
-          slave-data-source-names: ds-user-slave0
+          master-data-source-name: ds-order-master-1
+          slave-data-source-names: ds-order-master-1-slave-0,ds-order-master-1-slave-1
+      default-database-strategy:
+        inline:
+          sharding-column: user_id
+          algorithm-expression: ds-order-ms-$->{user_id % 2}
       tables:
         t_order:
-          actual-data-nodes: order_ms.t_order_$->{0..2}
+          actual-data-nodes: ds-order-ms-$->{0..1}.t_order_$->{0..2}
           table-strategy:
             inline:
               sharding-column: order_id
               algorithm-expression: t_order_$->{order_id % 3}
           key-generator:
-            column: id
+            column: order_id
             type: SNOWFLAKE
-        t_user:
-          actual-data-nodes: user_ms.t_user
+        t_order_item:
+          actual-data-nodes: ds-order-ms-$->{0..1}.t_order_item_$->{0..2}
+          table-strategy:
+            inline:
+              sharding-column: order_id
+              algorithm-expression: t_order_item_$->{order_id % 3}
+          key-generator:
+            column: order_item_id
+            type: SNOWFLAKE
+            props:
+              max.vibration.offset: 2
+              worker.id: 100
       defaultTableStrategy:
         none:
+      binding-tables: t_order, t_order_item
     props:
       sql:
         show: true
