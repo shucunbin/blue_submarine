@@ -1,4 +1,4 @@
-package io.blue.submarine.han.core.config.datasource;
+package io.blue.submarine.han.core.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;

@@ -1,4 +1,4 @@
-package io.blue.submarine.han.core.config.datasource;
+package io.blue.submarine.han.core.shardingjdbc.config;
 
 import org.apache.shardingsphere.api.hint.HintManager;
 import org.apache.shardingsphere.masterslave.route.engine.impl.MasterVisitedManager;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * 3. 在方法头增加 @Transactional 注解的，该方法体内所有sql自动路由到主库
  * 参考：https://llg-software.github.io/2019/03/14/sharding/master-slave-route-append/
  * @author shucunbin
- * @see io.blue.submarine.han.core.config.datasource.HintMaster
+ * @see HintMaster
  */
 @Component
 @Aspect

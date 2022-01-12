@@ -1,7 +1,7 @@
 # 读写分离
-#spring:
-#  profiles:
-#    active: master-slave
+spring:
+  profiles:
+    active: master-slave-v2
 
 
 # 分表
@@ -29,6 +29,6 @@
 
 
 # 读写分离 + 分库分表 + 普通库
-spring:
-  profiles:
-    active: sharding-master-slave-v2
+#spring:
+#  profiles:
+#    active: sharding-master-slave-v2

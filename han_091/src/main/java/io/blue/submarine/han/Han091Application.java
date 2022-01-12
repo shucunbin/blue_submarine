@@ -37,9 +37,11 @@ public class Han091Application implements CommandLineRunner {
 //        userService.save(user);
 //        System.out.println(user);
 
-        orderService.findByOrderId(1L);
-        orderService.findByOrderIdFromMaster(2L);
-        orderService.findByOrderId(3L);
+//        orderService.findByOrderId(1L);
+//        orderService.findByOrderIdFromMaster(2L);
+//        orderService.findByOrderId(3L);
+
+        userService.findByUserId(1L);
 
     }
 }

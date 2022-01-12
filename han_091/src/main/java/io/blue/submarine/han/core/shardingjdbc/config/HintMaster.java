@@ -1,4 +1,4 @@
-package io.blue.submarine.han.core.config.datasource;
+package io.blue.submarine.han.core.shardingjdbc.config;
 
 import java.lang.annotation.*;
 
