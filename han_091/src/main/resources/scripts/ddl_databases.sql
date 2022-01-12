@@ -17,3 +17,6 @@ CREATE DATABASE `db_order_master_0_slave_1` DEFAULT CHARACTER SET utf8mb4 COLLAT
 CREATE DATABASE `db_order_master_1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 CREATE DATABASE `db_order_master_1_slave_0` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 CREATE DATABASE `db_order_master_1_slave_1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
+# 普通库
+CREATE DATABASE `db_user` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;

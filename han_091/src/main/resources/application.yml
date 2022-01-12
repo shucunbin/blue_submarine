@@ -23,6 +23,12 @@
 
 
 # 读写分离 + 分库分表
+#spring:
+#  profiles:
+#    active: sharding-master-slave
+
+
+# 读写分离 + 分库分表 + 普通库
 spring:
   profiles:
-    active: sharding-master-slave
+    active: sharding-master-slave-v2

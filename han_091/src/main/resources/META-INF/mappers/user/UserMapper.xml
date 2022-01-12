@@ -3,13 +3,18 @@
 <mapper namespace="io.blue.submarine.han.dao.mapper.user.UserMapper" >
     <resultMap id="BaseResultMap" type="io.blue.submarine.han.core.model.user.User">
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
         <result column="name" property="name" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="findByUserId" resultMap="BaseResultMap">
         SELECT id, user_id,name
         FROM t_user
-        WHERE user_id = #{user_id}
+        WHERE user_id = #{userId}
     </select>
+
+    <insert id="insert" parameterType="io.blue.submarine.han.core.model.user.User" keyProperty="id" useGeneratedKeys="true">
+        insert into t_user(user_id, name)
+        values (#{userId}, #{name})
+    </insert>
 </mapper>

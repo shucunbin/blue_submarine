@@ -7,7 +7,7 @@ use db_user_master;
 CREATE TABLE `t_user`
 (
     `id`      bigint unsigned NOT NULL AUTO_INCREMENT,
-    `user_id` int             NOT NULL,
+    `user_id` bigint          NOT NULL,
     `name`    varchar(32) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
@@ -19,7 +19,7 @@ use db_user_slave0;
 CREATE TABLE `t_user`
 (
     `id`      bigint unsigned NOT NULL AUTO_INCREMENT,
-    `user_id` int             NOT NULL,
+    `user_id` bigint          NOT NULL,
     `name`    varchar(32) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
@@ -31,7 +31,7 @@ use db_user_slave1;
 CREATE TABLE `t_user`
 (
     `id`      bigint unsigned NOT NULL AUTO_INCREMENT,
-    `user_id` int             NOT NULL,
+    `user_id` bigint          NOT NULL,
     `name`    varchar(32) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB

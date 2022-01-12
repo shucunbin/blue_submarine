@@ -1,7 +1,9 @@
 package io.blue.submarine.han;
 
+import io.blue.submarine.han.core.model.user.User;
 import io.blue.submarine.han.dao.mapper.user.UserMapper;
 import io.blue.submarine.han.service.OrderService;
+import io.blue.submarine.han.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +21,7 @@ public class Han091Application implements CommandLineRunner {
     private OrderService orderService;
 
     @Resource
-    private UserMapper userMapper;
+    private UserService userService;
 
 
     public static void main(String[] args) {
@@ -28,19 +30,13 @@ public class Han091Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        orderService.complexProcess();
-//        orderService.findByUserId(1L);
-//        orderService.findByUserId(2L);
-//
-//        Order order1 = orderService.findByOrderId(1);
-//        System.out.println(order1);
-//
-//        Order orderFromMaster = orderService.findByOrderIdFromMaster(1);
-//        System.out.println("order query from master ===> " + orderFromMaster);
+//        orderService.complexProcess();
 
+        User user = new User();
+        user.setUserId(1L);
+        user.setName("zhangsan");
+        userService.save(user);
+        System.out.println(user);
 
-//
-//        userMapper.findByUserId(1);
-//        userMapper.findByUserId(2);
     }
 }
