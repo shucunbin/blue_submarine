@@ -1,7 +1,6 @@
 package io.blue.submarine.han;
 
 import io.blue.submarine.han.core.model.user.User;
-import io.blue.submarine.han.dao.mapper.user.UserMapper;
 import io.blue.submarine.han.service.OrderService;
 import io.blue.submarine.han.service.UserService;
 import org.springframework.boot.CommandLineRunner;
@@ -32,11 +31,15 @@ public class Han091Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        orderService.complexProcess();
 
-        User user = new User();
-        user.setUserId(1L);
-        user.setName("zhangsan");
-        userService.save(user);
-        System.out.println(user);
+//        User user = new User();
+//        user.setUserId(1L);
+//        user.setName("zhangsan");
+//        userService.save(user);
+//        System.out.println(user);
+
+        orderService.findByOrderId(1L);
+        orderService.findByOrderIdFromMaster(2L);
+        orderService.findByOrderId(3L);
 
     }
 }

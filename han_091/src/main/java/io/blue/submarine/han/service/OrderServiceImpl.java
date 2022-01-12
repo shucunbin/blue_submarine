@@ -1,10 +1,10 @@
 package io.blue.submarine.han.service;
 
+import io.blue.submarine.han.core.config.datasource.HintMaster;
 import io.blue.submarine.han.core.model.order.Order;
 import io.blue.submarine.han.core.model.order.OrderItem;
 import io.blue.submarine.han.dao.mapper.order.OrderItemMapper;
 import io.blue.submarine.han.dao.mapper.order.OrderMapper;
-import org.apache.shardingsphere.api.hint.HintManager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,12 +29,10 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.selectByOrderId(orderId);
     }
 
+    @HintMaster
     @Override
     public Order findByOrderIdFromMaster(Long orderId) {
-        try (HintManager hintManager = HintManager.getInstance()) {
-            hintManager.setMasterRouteOnly();
-            return orderMapper.selectByOrderId(orderId);
-        }
+        return orderMapper.selectByOrderId(orderId);
     }
 
     @Override
@@ -54,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 
     private List<Long> batchSave() {
         List<Long> orderIdList = new ArrayList<>();
-        for(long i = 1; i <= 10; i ++) {
+        for (long i = 1; i <= 10; i++) {
             Order order = new Order();
             order.setUserId(i);
             order.setStatus("New");
