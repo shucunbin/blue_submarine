@@ -58,7 +58,6 @@
             <artifactId>sharding-jdbc-spring-namespace</artifactId>
             <version>${sharding-sphere.version}</version>
         </dependency>
-
         <!-- dynamic datasource -->
 <!--        <dependency>-->
 <!--            <groupId>com.baomidou</groupId>-->

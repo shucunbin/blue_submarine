@@ -4,17 +4,23 @@
     <resultMap id="BaseResultMap" type="io.blue.submarine.han.core.model.user.User">
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="user_id" property="userId" jdbcType="BIGINT" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="findByUserId" resultMap="BaseResultMap">
-        SELECT id, user_id,name
+        SELECT id, user_id,user_name
         FROM t_user
         WHERE user_id = #{userId}
     </select>
 
+    <select id="findByUserName" resultMap="BaseResultMap">
+        SELECT id, user_id, user_name
+        FROM t_user
+        WHERE user_name = #{userName}
+    </select>
+
     <insert id="insert" parameterType="io.blue.submarine.han.core.model.user.User" keyProperty="id" useGeneratedKeys="true">
-        insert into t_user(user_id, name)
-        values (#{userId}, #{name})
+        insert into t_user(user_id, user_name)
+        values (#{userId}, #{userName})
     </insert>
 </mapper>

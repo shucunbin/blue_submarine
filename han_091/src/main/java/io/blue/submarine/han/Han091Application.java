@@ -33,15 +33,21 @@ public class Han091Application implements CommandLineRunner {
 
 //        User user = new User();
 //        user.setUserId(1L);
-//        user.setName("zhangsan");
+//        user.setUserName("zhangsan");
 //        userService.save(user);
 //        System.out.println(user);
+
+        User user1 = userService.findByUserId(1L);
+        System.out.println(user1);
+
+        User user2 = userService.findByUserName("zhangsan");
+        System.out.println(user2);
 
 //        orderService.findByOrderId(1L);
 //        orderService.findByOrderIdFromMaster(2L);
 //        orderService.findByOrderId(3L);
 
-        userService.findByUserId(1L);
+//        userService.findByUserId(1L);
 
     }
 }

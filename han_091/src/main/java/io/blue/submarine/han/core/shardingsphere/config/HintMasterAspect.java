@@ -1,4 +1,4 @@
-package io.blue.submarine.han.core.shardingjdbc.config;
+package io.blue.submarine.han.core.shardingsphere.config;
 
 import org.apache.shardingsphere.api.hint.HintManager;
 import org.apache.shardingsphere.masterslave.route.engine.impl.MasterVisitedManager;

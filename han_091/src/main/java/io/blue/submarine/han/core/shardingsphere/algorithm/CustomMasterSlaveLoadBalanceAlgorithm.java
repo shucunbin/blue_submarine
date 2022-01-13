@@ -1,4 +1,4 @@
-package io.blue.submarine.han.core.shardingjdbc.algorithm;
+package io.blue.submarine.han.core.shardingsphere.algorithm;
 
 import org.apache.shardingsphere.spi.masterslave.MasterSlaveLoadBalanceAlgorithm;
 

@@ -1,4 +1,4 @@
-package io.blue.submarine.han.core.shardingjdbc.algorithm;
+package io.blue.submarine.han.core.shardingsphere.algorithm;
 
 import org.apache.shardingsphere.api.sharding.standard.RangeShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.standard.RangeShardingValue;
@@ -10,7 +10,7 @@ import java.util.Collection;
  *
  * @author shucunbin
  */
-public class CustomRangeShardingAlgorithm implements RangeShardingAlgorithm<Long> {
+public class CustomRangeShardingTableAlgorithm implements RangeShardingAlgorithm<Long> {
     @Override
     public Collection<String> doSharding(Collection availableTargetNames, RangeShardingValue shardingValue) {
         return null;

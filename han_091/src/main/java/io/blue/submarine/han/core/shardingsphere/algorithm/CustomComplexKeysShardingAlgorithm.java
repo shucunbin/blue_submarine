@@ -1,4 +1,4 @@
-package io.blue.submarine.han.core.shardingjdbc.algorithm;
+package io.blue.submarine.han.core.shardingsphere.algorithm;
 
 import org.apache.shardingsphere.api.sharding.complex.ComplexKeysShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.complex.ComplexKeysShardingValue;

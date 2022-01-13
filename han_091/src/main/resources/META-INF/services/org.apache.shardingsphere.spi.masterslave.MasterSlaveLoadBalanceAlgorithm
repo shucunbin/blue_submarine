@@ -1,3 +1,3 @@
 org.apache.shardingsphere.core.strategy.masterslave.RoundRobinMasterSlaveLoadBalanceAlgorithm
 org.apache.shardingsphere.core.strategy.masterslave.RandomMasterSlaveLoadBalanceAlgorithm
-io.blue.submarine.han.core.shardingjdbc.algorithm.CustomMasterSlaveLoadBalanceAlgorithm
+io.blue.submarine.han.core.shardingsphere.algorithm.CustomMasterSlaveLoadBalanceAlgorithm

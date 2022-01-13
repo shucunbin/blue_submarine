@@ -8,7 +8,8 @@ CREATE TABLE `t_user`
 (
     `id`      bigint unsigned NOT NULL AUTO_INCREMENT,
     `user_id` bigint          NOT NULL,
-    `name`    varchar(32) DEFAULT NULL,
+    `user_name`    varchar(256) DEFAULT NULL,
+    `user_name_cipher`varchar(256) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4

@@ -1,6 +1,6 @@
 package io.blue.submarine.han.service;
 
-import io.blue.submarine.han.core.shardingjdbc.config.HintMaster;
+import io.blue.submarine.han.core.shardingsphere.config.HintMaster;
 import io.blue.submarine.han.core.model.order.Order;
 import io.blue.submarine.han.core.model.order.OrderItem;
 import io.blue.submarine.han.dao.mapper.order.OrderItemMapper;

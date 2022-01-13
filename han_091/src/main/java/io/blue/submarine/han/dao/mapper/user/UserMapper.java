@@ -13,5 +13,7 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
     User findByUserId(@Param("userId") Long userId);
 
+    User findByUserName(@Param("userName") String userName);
+
     int insert(User user);
 }

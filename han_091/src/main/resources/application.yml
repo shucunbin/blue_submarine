@@ -1,7 +1,7 @@
 # 读写分离
-spring:
-  profiles:
-    active: master-slave-v2
+#spring:
+#  profiles:
+#    active: master-slave-v2
 
 
 # 分表
@@ -32,3 +32,15 @@ spring:
 #spring:
 #  profiles:
 #    active: sharding-master-slave-v2
+
+
+# 数据脱敏
+#spring:
+#  profiles:
+#    active: encrypt-databases
+
+
+# 数据脱敏 + 读写分离
+spring:
+  profiles:
+    active: master-slave-encrypt-databases

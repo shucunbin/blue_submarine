@@ -1,4 +1,4 @@
-package io.blue.submarine.han.core.shardingjdbc.config;
+package io.blue.submarine.han.core.shardingsphere.config;
 
 import java.lang.annotation.*;
 
