@@ -10,7 +10,7 @@ import java.util.Collection;
  *
  * @author shucunbin
  */
-public class CustomComplexKeysShardingAlgorithm implements ComplexKeysShardingAlgorithm<Long> {
+public final class CustomComplexKeysShardingAlgorithm implements ComplexKeysShardingAlgorithm<Long> {
     @Override
     public Collection<String> doSharding(Collection availableTargetNames, ComplexKeysShardingValue shardingValue) {
         return null;

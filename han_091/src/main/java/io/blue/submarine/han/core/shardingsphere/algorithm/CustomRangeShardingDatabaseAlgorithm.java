@@ -10,7 +10,7 @@ import java.util.Collection;
  *
  * @author shucunbin
  */
-public class CustomRangeShardingDatabaseAlgorithm implements RangeShardingAlgorithm<Long> {
+public final class CustomRangeShardingDatabaseAlgorithm implements RangeShardingAlgorithm<Long> {
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, RangeShardingValue<Long> shardingValue) {
         return null;

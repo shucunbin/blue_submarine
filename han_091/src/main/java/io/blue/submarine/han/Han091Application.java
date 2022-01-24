@@ -1,13 +1,10 @@
 package io.blue.submarine.han;
 
-import io.blue.submarine.han.core.model.user.User;
-import io.blue.submarine.han.service.OrderService;
-import io.blue.submarine.han.service.UserService;
+import io.blue.submarine.han.service.UserSubInfoIndexService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import javax.annotation.Resource;
 
 /**
  * 启动类.
@@ -16,12 +13,8 @@ import javax.annotation.Resource;
  */
 @SpringBootApplication
 public class Han091Application implements CommandLineRunner {
-    @Resource
-    private OrderService orderService;
-
-    @Resource
-    private UserService userService;
-
+    @Autowired
+    private UserSubInfoIndexService userSubInfoIndexService;
 
     public static void main(String[] args) {
         SpringApplication.run(Han091Application.class, args);
@@ -29,25 +22,16 @@ public class Han091Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        orderService.complexProcess();
-
-//        User user = new User();
-//        user.setUserId(1L);
-//        user.setUserName("zhangsan");
-//        userService.save(user);
-//        System.out.println(user);
-
-        User user1 = userService.findByUserId(1L);
-        System.out.println(user1);
-
-        User user2 = userService.findByUserName("zhangsan");
-        System.out.println(user2);
-
-//        orderService.findByOrderId(1L);
-//        orderService.findByOrderIdFromMaster(2L);
-//        orderService.findByOrderId(3L);
-
-//        userService.findByUserId(1L);
-
+        userSubInfoIndexService.createUserSubInfoIndex();
+//
+//        UserSubInfo userSubInfo = new UserSubInfo();
+//        userSubInfo.setUserId(853715L);
+//        userSubInfo.setKeyword("ysl");
+//        userSubInfo.setCategory(Lists.newArrayList( "83886081"));
+//        userSubInfo.setMerchant("");
+//        userSubInfo.setLang("cn");
+//        userSubInfo.setCreateTime(System.currentTimeMillis());
+//        userSubInfo.setUpdateTime(System.currentTimeMillis());
+//        userSubInfoIndex.indexUserSubInfo(userSubInfo);
     }
 }

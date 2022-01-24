@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author shucunbin
  */
-public class CustomMasterSlaveLoadBalanceAlgorithm implements MasterSlaveLoadBalanceAlgorithm {
+public final class CustomMasterSlaveLoadBalanceAlgorithm implements MasterSlaveLoadBalanceAlgorithm {
     private Properties properties = new Properties();
 
     @Override

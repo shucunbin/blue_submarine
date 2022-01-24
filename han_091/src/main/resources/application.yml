@@ -1,7 +1,10 @@
+server:
+  port: 8081
+
 # 读写分离
-#spring:
-#  profiles:
-#    active: master-slave-v2
+spring:
+  profiles:
+    active: master-slave-v2
 
 
 # 分表
@@ -41,6 +44,6 @@
 
 
 # 数据脱敏 + 读写分离
-spring:
-  profiles:
-    active: master-slave-encrypt-databases
+#spring:
+#  profiles:
+#    active: master-slave-encrypt-databases
