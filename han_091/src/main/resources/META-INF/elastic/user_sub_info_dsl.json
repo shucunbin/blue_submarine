@@ -1,0 +1,142 @@
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "bool": {
+            "must": {
+              "term": {
+                "store_id": 1001
+              }
+            },
+            "must_not": [
+              {
+                "exists": {
+                  "field": "category_id"
+                }
+              },
+              {
+                "exists": {
+                  "field": "keyword"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": {
+              "match": {
+                "keyword": "iphone 14 马上发布了"
+              }
+            },
+            "must_not": [
+              {
+                "exists": {
+                  "field": "category"
+                }
+              },
+              {
+                "exists": {
+                  "field": "store_id"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "match": {
+                  "kewyword": "iphone 14 马上发布了"
+                }
+              },
+              {
+                "term": {
+                  "category_id": 102031
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "store_id"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "match": {
+                  "keyword": "小白鞋上市了"
+                }
+              },
+              {
+                "term": {
+                  "store_id": 1001
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "category_id"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "store_id": 1001
+                }
+              },
+              {
+                "term": {
+                  "category_id": 102031
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "keyword"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "match": {
+                  "keyword": "折扣标题 折扣亮点"
+                }
+              },
+              {
+                "term": {
+                  "store_id": 1001
+                }
+              },
+              {
+                "term": {
+                  "category_id": 102031
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "minimum_should_match": 1,
+      "boost": 1
+    }
+  }
+}

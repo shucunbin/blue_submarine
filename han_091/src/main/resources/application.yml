@@ -4,7 +4,7 @@ server:
 # 读写分离
 spring:
   profiles:
-    active: master-slave-v2
+    active: master-slave
 
 
 # 分表

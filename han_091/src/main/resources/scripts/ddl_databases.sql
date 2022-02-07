@@ -20,3 +20,9 @@ CREATE DATABASE `db_order_master_1_slave_1` DEFAULT CHARACTER SET utf8mb4 COLLAT
 
 # 普通库
 CREATE DATABASE `db_user` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
+
+# canal 用户
+CREATE USER canal IDENTIFIED BY 'canal';
+GRANT ALL PRIVILEGES ON *.* TO 'canal'@'%' ;
+FLUSH PRIVILEGES;

@@ -1,0 +1,83 @@
+{
+  "mappings": {
+    "data": {
+      "dynamic": "false",
+      "_all": {
+        "enabled": "false"
+      },
+      "properties": {
+        "household_id": {
+          "type": "keyword"
+        },
+        "household_role": {
+          "type": "keyword"
+        },
+        "resident_id": {
+          "type": "keyword"
+        },
+        "resident_name": {
+          "type": "text",
+          "fields": {
+            "raw": {
+              "type": "keyword"
+            }
+          }
+        },
+        "subsidy_type": {
+          "type": "text",
+          "fields": {
+            "raw": {
+              "type": "keyword"
+            }
+          }
+        },
+        "subsidy_item": {
+          "type": "text",
+          "fields": {
+            "raw": {
+              "type": "keyword"
+            }
+          }
+        },
+        "subsidy_batch_no": {
+          "type": "integer"
+        },
+        "subsidy_amount": {
+          "type": "double"
+        },
+        "bank_name": {
+          "type": "text",
+          "fields": {
+            "raw": {
+              "type": "keyword"
+            }
+          }
+        },
+        "bank_account_name": {
+          "type": "text",
+          "fields": {
+            "raw": {
+              "type": "keyword"
+            }
+          }
+        },
+        "bank_account": {
+          "type": "keyword"
+        },
+        "subsidies_date": {
+          "type": "date",
+          "format": "yyyyMM"
+        },
+        "subsidies_status": {
+          "type": "integer"
+        },
+        "create_time": {
+          "type": "long"
+        },
+        "update_time": {
+          "type": "long"
+        }
+      }
+    }
+  }
+}

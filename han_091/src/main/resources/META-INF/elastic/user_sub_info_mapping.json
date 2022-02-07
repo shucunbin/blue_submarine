@@ -13,10 +13,10 @@
           "type": "text",
           "analyzer": "ik"
         },
-        "category": {
+        "category_id": {
           "type": "integer"
         },
-        "merchant": {
+        "store_id": {
           "type": "keyword"
         },
         "lang": {
