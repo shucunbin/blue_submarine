@@ -41,41 +41,68 @@ public class ResidentSubsidyInfoServiceImpl implements ResidentSubsidyInfoServic
     private ObjectMapper objectMapper;
 
     @Override
-    @SneakyThrows
+
     public void initData() {
         residentSubsidyInfoIndexService.createResidentSubsidyInfoIndexIfNotExist();
         List<ResidentInfo> residentInfoList = residentInfoService.readFromExcel();
-        List<String> noSubsidyInfoList = Lists.newArrayList();
+
         for (ResidentInfo residentInfo : residentInfoList) {
             String residentId = residentInfo.getResidentId();
             if ("残疾".equalsIgnoreCase(residentInfo.getHealthStatus())) {
                 residentId = residentId.substring(0, residentId.length() - 2);
             }
-            String reqParam = objectMapper.writeValueAsString(new ResidentSubsidyInfoRequest(residentId));
-            String response = lszRpcService.getResidentSubsidyInfo(reqParam);
+            indexPart1(residentId, residentInfo);
+            indexPart2(residentId, residentInfo);
+        }
+    }
 
-            ResidentSubsidyInfoResponse residentSubsidyInfoResponse = null;
-            try {
-                residentSubsidyInfoResponse = objectMapper.readValue(response, ResidentSubsidyInfoResponse.class);
-            } catch (Exception ignored) {
-                noSubsidyInfoList.add(residentId);
+    @SneakyThrows
+    private void indexPart1(String residentId, ResidentInfo residentInfo) {
+        String reqParam = objectMapper.writeValueAsString(new ResidentSubsidyInfoRequest("Q2059", residentId));
+        String response = lszRpcService.getResidentSubsidyInfo(reqParam);
+        ResidentSubsidyInfoResponse residentSubsidyInfoResponse = null;
+        try {
+            residentSubsidyInfoResponse = objectMapper.readValue(response, ResidentSubsidyInfoResponse.class);
+        } catch (Exception ignored) {
+        }
+        if (Objects.nonNull(residentSubsidyInfoResponse)) {
+            List<ResidentSubsidyInfo> residentSubsidyInfoList = residentSubsidyInfoResponse.convertToResidentSubsidyInfoList();
+            for (ResidentSubsidyInfo residentSubsidyInfo : residentSubsidyInfoList) {
+                residentSubsidyInfo.setHouseholdId(residentInfo.getHouseholdId());
+                residentSubsidyInfo.setHouseholdRole(residentInfo.getHouseholdRole());
+                residentSubsidyInfo.setResidentId(residentId);
+                residentSubsidyInfo.setSubsidyType(SubsidyItemEnum.getTypeByName(residentSubsidyInfo.getSubsidyItem()));
             }
 
-            if (Objects.nonNull(residentSubsidyInfoResponse)) {
-                List<ResidentSubsidyInfo> residentSubsidyInfoList = residentSubsidyInfoResponse.convertToResidentSubsidyInfoList();
-                for (ResidentSubsidyInfo residentSubsidyInfo : residentSubsidyInfoList) {
-                    residentSubsidyInfo.setHouseholdId(residentInfo.getHouseholdId());
-                    residentSubsidyInfo.setHouseholdRole(residentInfo.getHouseholdRole());
-                    residentSubsidyInfo.setResidentId(residentId);
-                    residentSubsidyInfo.setSubsidyType(SubsidyItemEnum.getTypeByName(residentSubsidyInfo.getSubsidyItem()));
+            residentSubsidyInfoIndexService.batchIndexResidentSubsidyInfo(residentSubsidyInfoList);
+        }
+    }
+
+    @SneakyThrows
+    private void indexPart2(String residentId, ResidentInfo residentInfo) {
+        String reqParam = objectMapper.writeValueAsString(new ResidentSubsidyInfoRequest("CKKQ014", residentId));
+        String response = lszRpcService.getResidentSubsidyInfo(reqParam);
+        ResidentSubsidyInfoResponse2 residentSubsidyInfoResponse = null;
+        try {
+            residentSubsidyInfoResponse = objectMapper.readValue(response, ResidentSubsidyInfoResponse2.class);
+        } catch (Exception ignored) {
+        }
+        if (Objects.nonNull(residentSubsidyInfoResponse)) {
+            List<ResidentSubsidyInfo> residentSubsidyInfoList = residentSubsidyInfoResponse.convertToResidentSubsidyInfoList();
+            for (ResidentSubsidyInfo residentSubsidyInfo : residentSubsidyInfoList) {
+                residentSubsidyInfo.setHouseholdId(residentInfo.getHouseholdId());
+                residentSubsidyInfo.setHouseholdRole(residentInfo.getHouseholdRole());
+                residentSubsidyInfo.setResidentId(residentId);
+                if (StringUtils.isBlank(residentSubsidyInfo.getResidentName())) {
+                    residentSubsidyInfo.setResidentName(residentInfo.getResidentName());
                 }
-
-                residentSubsidyInfoIndexService.batchIndexResidentSubsidyInfo(residentSubsidyInfoList);
+                if (StringUtils.isBlank(residentSubsidyInfo.getBankAccountName())) {
+                    residentSubsidyInfo.setBankAccountName(residentInfo.getResidentName());
+                }
+                residentSubsidyInfo.setSubsidyType(SubsidyItemEnum.getTypeByName(residentSubsidyInfo.getSubsidyItem()));
             }
 
-            log.info(">>>>>> the total number of the resident id is : {}", residentInfoList.size());
-            log.info(">>>>>> the number of the resident id of no subsidy info is : {}", noSubsidyInfoList.size());
-            log.info(">>>>>> the resident id list of no subsidy info : {}", noSubsidyInfoList);
+            residentSubsidyInfoIndexService.batchIndexResidentSubsidyInfo(residentSubsidyInfoList);
         }
     }
 

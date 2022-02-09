@@ -157,6 +157,7 @@ public enum SubsidyItemEnum {
     SUBSIDY_ITEM_138("中职助学金_四", "帮扶"),
     SUBSIDY_ITEM_139("家庭经济困难大学新生入学资助（路费补助）", "帮扶"),
     SUBSIDY_ITEM_140("贫困党员定期补助", "帮扶"),
+    SUBSIDY_ITEM_141("居民养老保险", "养老保险金"),
 
     ;
     private final String itemName;

@@ -13,15 +13,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * 居民补助信息请求响应类.
- *
+ * 居民养老保险信息请求响应类.
  * @author shucunbin
- * @date 2022-02-06 15:22
+ * @date 2022-02-07 20:50
  */
 @Getter
 @Setter
 @ToString
-public class ResidentSubsidyInfoResponse {
+public class ResidentSubsidyInfoResponse2 {
     private String code;
     private String message;
     private Output output;
@@ -55,44 +54,39 @@ public class ResidentSubsidyInfoResponse {
         return residentSubsidyInfoList;
     }
 
-
     @Getter
     @Setter
     static class Output {
-        List<ResultSet> resultset;
+        List<ResidentSubsidyInfoResponse2.ResultSet> resultset;
     }
-
 
     @Getter
     @Setter
     static class ResultSet {
-        @JsonProperty("aae003")
+        @JsonProperty("aae002")
         private String subsidiesDate;
 
-        @JsonProperty("aac003")
+        @JsonProperty("aae133")
         private String residentName;
 
-        @JsonProperty("item")
-        private String subsidyItem;
+        @JsonProperty("aae136")
+        private String residentId;
 
-        @JsonProperty("项目批次")
-        private String batchNo;
+        private String subsidyItem="居民养老保险";
+
+        private String batchNo = "1";
 
         @JsonProperty("aae019")
         private BigDecimal subsidyAmount;
 
-        @JsonProperty("aae008")
-        private String aae008;
-
         @JsonProperty("aae009")
         private String bankAccountName;
 
-        @JsonProperty("aaf002")
-        private String bankName;
-
-        @JsonProperty("收款银行账号")
+        @JsonProperty("aae010")
         private String bankAccount;
+
+        private String bankName = "未知";
+
+
     }
 }
-
-

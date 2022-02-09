@@ -17,10 +17,14 @@ public class ResidentSubsidyInfoRequest {
     private String number;
     private InData inData;
 
-    public ResidentSubsidyInfoRequest(String id) {
-        this.number = "Q2059";
+    public ResidentSubsidyInfoRequest(String number, String id) {
+        this.number = number;
         this.inData =  new InData(id);
     }
+
+    /*
+    {"number":"CKKQ014","inData":{"aac002":"513434194510021263","startrow":"1","endrow":"299"}}
+     */
 
     @Getter
     @Setter
