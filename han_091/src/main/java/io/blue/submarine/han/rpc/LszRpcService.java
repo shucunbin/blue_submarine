@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shucunbin
  * @date 2022-02-06 15:12
  */
-@FeignClient(contextId = "lszRpcService",name = "lsz-rpc-service", url = "http://wt.lsz.gov.cn:8003/lsrs/front/wxquery",
+@FeignClient(contextId = "lszRpcService",name = "lsz-rpc-service", url = "http://lszrs.com.cn:8003/lsrs/front/wxquery/",
         fallbackFactory = LszRpcService.LszRpcServiceFallbackFactory.class)
 public interface LszRpcService {
 

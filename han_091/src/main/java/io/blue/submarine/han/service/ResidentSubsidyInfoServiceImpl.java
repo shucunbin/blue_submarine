@@ -58,7 +58,7 @@ public class ResidentSubsidyInfoServiceImpl implements ResidentSubsidyInfoServic
 
     @SneakyThrows
     private void indexPart1(String residentId, ResidentInfo residentInfo) {
-        String reqParam = objectMapper.writeValueAsString(new ResidentSubsidyInfoRequest("Q2059", residentId));
+        String reqParam = objectMapper.writeValueAsString(new ResidentSubsidyInfoRequest("cdsi0009001", residentId));
         String response = lszRpcService.getResidentSubsidyInfo(reqParam);
         ResidentSubsidyInfoResponse residentSubsidyInfoResponse = null;
         try {
@@ -72,6 +72,9 @@ public class ResidentSubsidyInfoServiceImpl implements ResidentSubsidyInfoServic
                 residentSubsidyInfo.setHouseholdRole(residentInfo.getHouseholdRole());
                 residentSubsidyInfo.setResidentId(residentId);
                 residentSubsidyInfo.setSubsidyType(SubsidyItemEnum.getTypeByName(residentSubsidyInfo.getSubsidyItem()));
+                if (StringUtils.isBlank(residentSubsidyInfo.getSubsidyType())) {
+                    log.info(">>>>>> 补助类型缺失 ：{}", residentSubsidyInfo.getSubsidyItem());
+                }
             }
 
             residentSubsidyInfoIndexService.batchIndexResidentSubsidyInfo(residentSubsidyInfoList);
@@ -118,8 +121,8 @@ public class ResidentSubsidyInfoServiceImpl implements ResidentSubsidyInfoServic
         }
 
 
-        List<ResidentSubsidyInfo> residentSubsidyInfoListFromEs = residentSubsidyInfoIndexService.searchResidentSubsidyInfo("202010",
-                "202109");
+        List<ResidentSubsidyInfo> residentSubsidyInfoListFromEs = residentSubsidyInfoIndexService.searchResidentSubsidyInfo("202110",
+                "202206");
         String excelFileName = this.getClass().getResource("/doc/").getPath() +System.currentTimeMillis() + "_补贴信息" + ".xlsx";
         ExcelWriter excelWriter = EasyExcel.write(excelFileName).build();
         // 按户分组
@@ -187,18 +190,16 @@ public class ResidentSubsidyInfoServiceImpl implements ResidentSubsidyInfoServic
 
         ResidentSubsidyInfoExcel residentSubsidyInfoExcel = new ResidentSubsidyInfoExcel();
         residentSubsidyInfoExcel.setSubsidyType(subsidyType);
-        residentSubsidyInfoExcel.setYm1(month2Amount.getOrDefault("202010", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm2(month2Amount.getOrDefault("202011", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm3(month2Amount.getOrDefault("202012", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm4(month2Amount.getOrDefault("202101", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm5(month2Amount.getOrDefault("202102", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm6(month2Amount.getOrDefault("202103", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm7(month2Amount.getOrDefault("202104", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm8(month2Amount.getOrDefault("202105", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm9(month2Amount.getOrDefault("202106", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm10(month2Amount.getOrDefault("202107", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm11(month2Amount.getOrDefault("202108", new BigDecimal("0.00")).toPlainString());
-        residentSubsidyInfoExcel.setYm12(month2Amount.getOrDefault("202109", new BigDecimal("0.00")).toPlainString());
+        residentSubsidyInfoExcel.setYm1(month2Amount.getOrDefault("202110", new BigDecimal("0.00")).toPlainString());
+        residentSubsidyInfoExcel.setYm2(month2Amount.getOrDefault("202111", new BigDecimal("0.00")).toPlainString());
+        residentSubsidyInfoExcel.setYm3(month2Amount.getOrDefault("202112", new BigDecimal("0.00")).toPlainString());
+        residentSubsidyInfoExcel.setYm4(month2Amount.getOrDefault("202201", new BigDecimal("0.00")).toPlainString());
+        residentSubsidyInfoExcel.setYm5(month2Amount.getOrDefault("202202", new BigDecimal("0.00")).toPlainString());
+        residentSubsidyInfoExcel.setYm6(month2Amount.getOrDefault("202203", new BigDecimal("0.00")).toPlainString());
+        residentSubsidyInfoExcel.setYm7(month2Amount.getOrDefault("202204", new BigDecimal("0.00")).toPlainString());
+        residentSubsidyInfoExcel.setYm8(month2Amount.getOrDefault("202205", new BigDecimal("0.00")).toPlainString());
+        residentSubsidyInfoExcel.setYm9(month2Amount.getOrDefault("202206", new BigDecimal("0.00")).toPlainString());
+
         residentSubsidyInfoExcel.setSubsidyTotalAmount(totalAmount.toPlainString());
 
         return residentSubsidyInfoExcel;

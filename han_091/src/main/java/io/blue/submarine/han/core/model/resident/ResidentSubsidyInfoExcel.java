@@ -16,30 +16,24 @@ public class ResidentSubsidyInfoExcel {
     private String residentName;
     @ExcelProperty("补贴类型")
     private String subsidyType;
-    @ExcelProperty("202010")
+    @ExcelProperty("202110")
     private String ym1;
-    @ExcelProperty("202011")
+    @ExcelProperty("202111")
     private String ym2;
-    @ExcelProperty("202012")
+    @ExcelProperty("202112")
     private String ym3;
-    @ExcelProperty("202101")
+    @ExcelProperty("202201")
     private String ym4;
-    @ExcelProperty("202102")
+    @ExcelProperty("202202")
     private String ym5;
-    @ExcelProperty("202103")
+    @ExcelProperty("202203")
     private String ym6;
-    @ExcelProperty("202104")
+    @ExcelProperty("202204")
     private String ym7;
-    @ExcelProperty("202105")
+    @ExcelProperty("202205")
     private String ym8;
-    @ExcelProperty("202106")
+    @ExcelProperty("202206")
     private String ym9;
-    @ExcelProperty("202107")
-    private String ym10;
-    @ExcelProperty("202108")
-    private String ym11;
-    @ExcelProperty("202109")
-    private String ym12;
     @ExcelProperty("小计")
     private String subsidyTotalAmount;
 

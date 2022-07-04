@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import io.blue.submarine.han.core.model.resident.ResidentSubsidyInfo;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -37,7 +38,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class ResidentSubsidyInfoIndexServiceImpl implements ResidentSubsidyInfoIndexService {
-    private static final String INDEX_NAME = "resident_subsidy_info_v3";
+    private static final String INDEX_NAME = "resident_subsidy_info_v5";
     private static final String INDEX_TYPE = "data";
 
     private final TransportClient transportClient;
@@ -95,6 +96,9 @@ public class ResidentSubsidyInfoIndexServiceImpl implements ResidentSubsidyInfoI
     @Override
     @SneakyThrows
     public void batchIndexResidentSubsidyInfo(List<ResidentSubsidyInfo> residentSubsidyInfoList) {
+        if(CollectionUtils.isEmpty(residentSubsidyInfoList)) {
+            return;
+        }
         BulkRequestBuilder bulkRequestBuilder = transportClient.prepareBulk();
         for (ResidentSubsidyInfo residentSubsidyInfo : residentSubsidyInfoList) {
             IndexRequestBuilder indexRequest = transportClient.prepareIndex(INDEX_NAME, INDEX_TYPE)

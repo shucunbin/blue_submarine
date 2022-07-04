@@ -36,14 +36,13 @@ public class ResidentInfo {
     /**
      * 户角色
      */
-    @ExcelProperty(index = 10)
+    @ExcelProperty(index = 9)
     private String householdRole;
-
 
 
     /**
      * 居民健康状况
      */
-    @ExcelProperty(index = 14)
+    @ExcelProperty(index = 16)
     private String healthStatus;
 }

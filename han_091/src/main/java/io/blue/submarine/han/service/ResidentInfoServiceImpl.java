@@ -23,7 +23,7 @@ public class ResidentInfoServiceImpl implements ResidentInfoService{
     @Override
     public List<ResidentInfo> readFromExcel() {
         List<ResidentInfo> residentInfoList = Lists.newArrayList();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("doc/户信息_20220206.xls");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("doc/用户信息_20220702.xls");
         EasyExcel.read(inputStream, ResidentInfo.class, new ReadListener<ResidentInfo>() {
             @Override
             public void invoke(ResidentInfo data, AnalysisContext context) {
