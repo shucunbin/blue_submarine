@@ -182,6 +182,7 @@ public enum SubsidyItemEnum {
     SUBSIDY_ITEM_163("残疾人扶残助学（残疾学生教育资助）", "帮扶"),
     SUBSIDY_ITEM_164("分散特困人员救助供养金", "特困供养金"),
     SUBSIDY_ITEM_165("计划生育家庭特别扶助（资金）", "计划生育金"),
+    SUBSIDY_ITEM_166("未知补助类型", "其他转移性收入"),
 
     ;
     private final String itemName;

@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class ResidentSubsidyInfoIndexServiceImpl implements ResidentSubsidyInfoIndexService {
-    private static final String INDEX_NAME = "resident_subsidy_info_v5";
+    private static final String INDEX_NAME = "resident_subsidy_info_v6";
     private static final String INDEX_TYPE = "data";
 
     private final TransportClient transportClient;

@@ -73,7 +73,9 @@ public class ResidentSubsidyInfoServiceImpl implements ResidentSubsidyInfoServic
                 residentSubsidyInfo.setResidentId(residentId);
                 residentSubsidyInfo.setSubsidyType(SubsidyItemEnum.getTypeByName(residentSubsidyInfo.getSubsidyItem()));
                 if (StringUtils.isBlank(residentSubsidyInfo.getSubsidyType())) {
-                    log.info(">>>>>> 补助类型缺失 ：{}", residentSubsidyInfo.getSubsidyItem());
+                    log.info(">>>>>> 补助类型缺失 ：{} - {}", residentSubsidyInfo.getSubsidyItem(), residentSubsidyInfo.getSubsidyAmount());
+                    residentSubsidyInfo.setSubsidyItem("未知补助类型");
+                    residentSubsidyInfo.setSubsidyType("其他转移性收入");
                 }
             }
 
@@ -146,6 +148,9 @@ public class ResidentSubsidyInfoServiceImpl implements ResidentSubsidyInfoServic
             List<ResidentSubsidyInfoExcel> residentSubsidyInfoExcelList = Lists.newArrayList();
             List<ResidentSubsidyInfoExcel2> residentSubsidyInfoExcel2List = Lists.newArrayList();
             // 按补贴类型分组
+            if ("阿尔木机".equalsIgnoreCase(householdHeaderName)) {
+                log.info(">>>>>> 户主名为:{}......", householdHeaderName);
+            }
             Map<String, List<ResidentSubsidyInfo>> groupBySubsidyTypeMap = residentSubsidyInfoList.stream()
                     .collect(Collectors.groupingBy(ResidentSubsidyInfo::getSubsidyType));
             for (Map.Entry<String, List<ResidentSubsidyInfo>> groupBySubsidyTypeEntry : groupBySubsidyTypeMap.entrySet()) {
